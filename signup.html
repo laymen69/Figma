@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inscription Professionnelle</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js"></script>
+  <style>
+    :root {
+      --primary-color: #2A3F5F;
+      --secondary-color: #4A6572;
+      --accent-color: #F9AA33;
+      --background-light: #F5F7FA;
+      --text-primary: #2D3748;
+      --text-secondary: #718096;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      background: var(--background-light);
+    }
+
+    #bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      opacity: 0.9;
+    }
+
+    .login-container {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 2.5rem 3.5rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.05);
+      width: 100%;
+      max-width: 480px;
+      margin: auto;
+      top: 50%;
+      transform: translateY(-50%);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .login-header h1 {
+      margin-bottom: 0.75rem;
+      text-align: center;
+      color: var(--primary-color);
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .login-header p {
+      margin-bottom: 2rem;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+      position: relative;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    input {
+      width: 100%;
+      padding: 0.85rem 1.25rem;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-size: 0.95rem;
+      background: #F8FAFC;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(42, 63, 95, 0.1);
+      background: white;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: var(--text-secondary);
+    }
+
+    button {
+      width: 100%;
+      padding: 1rem;
+      background-color: var(--primary-color);
+      border: none;
+      color: white;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    button:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .login-footer {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .login-footer a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .login-footer a:hover {
+      color: var(--secondary-color);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 1.5rem;
+        margin: 0 1rem;
+      }
+
+      .login-header h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg"></canvas>
+
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <h1>Créer un compte</h1>
+        <p>Inscrivez-vous pour accéder à l'espace professionnel</p>
+      </div>
+      <form id="registerForm">
+        <div class="form-group">
+          <label for="name">Nom complet</label>
+          <input type="text" id="name" placeholder="Jean Dupont" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Adresse Email</label>
+          <input type="email" id="email" placeholder="contact@entreprise.com" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" placeholder="••••••••" required />
+          <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+        </div>
+        <button type="submit">S'inscrire</button>
+      </form>
+      <div class="login-footer">
+        <a href="login.html">Déjà inscrit ? Se connecter</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+    togglePassword.addEventListener('click', function () {
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+      this.classList.toggle('fa-eye-slash');
+    });
+
+    // Particules animées
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({
+      canvas: document.getElementById('bg'),
+      alpha: true,
+      antialias: true
+    });
+
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.position.z = 8;
+
+    const geometry = new THREE.BufferGeometry();
+    const particlesCount = 3000;
+    const positions = new Float32Array(particlesCount * 3);
+    const colors = new Float32Array(particlesCount * 3);
+
+    for (let i = 0; i < particlesCount * 3; i += 3) {
+      positions[i] = (Math.random() - 0.5) * 20;
+      positions[i + 1] = (Math.random() - 0.5) * 20;
+      positions[i + 2] = (Math.random() - 0.5) * 20;
+
+      colors[i] = 0.1 + Math.random() * 0.3;
+      colors[i + 1] = 0.2 + Math.random() * 0.4;
+      colors[i + 2] = 0.3 + Math.random() * 0.5;
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    const material = new THREE.PointsMaterial({
+      size: 0.08,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.7,
+      blending: THREE.AdditiveBlending
+    });
+
+    const particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+
+    function animate() {
+      requestAnimationFrame(animate);
+      particles.rotation.y += 0.001;
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // Gestion du formulaire : enregistrement + redirection
+    document.getElementById("registerForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      localStorage.setItem("user", JSON.stringify({ name, email, password }));
+
+      // Redirection vers login.html
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>

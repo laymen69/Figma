@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chausse Professionnelle - Accueil</title>
+
+  <link rel="stylesheet" href="styles.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary-color: #004e89;
+      --secondary-color: #00aaff;
+      --accent-color: #ffb400;
+      --bg-light: #f9fafb;
+      --bg-dark: #1f2937;
+      --text-color: #1a1a1a;
+      --text-light: #ffffff;
+      --font-family: 'Inter', sans-serif;
+      --gradient-bg: linear-gradient(135deg, #004e89 0%, #00aaff 100%);
+    }
+
+    body {
+      font-family: var(--font-family);
+      margin: 0;
+      padding: 0;
+      background: var(--gradient-bg);
+      background-attachment: fixed;
+      color: var(--text-light);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(31, 41, 55, 0.85);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .header, .footer {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      position: relative;
+      z-index: 10;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 15px 0;
+      position: relative;
+      z-index: 10;
+      gap: 20px;
+    }
+
+    .logo-presentation {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      margin-bottom: 40px;
+      background: rgba(255 255 255 / 0.1);
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      overflow: visible;
+      z-index: 5;
+    }
+
+    .logo-presentation svg.logo {
+      width: 80px;
+      height: 80px;
+      margin-right: 20px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+      flex-shrink: 0;
+    }
+
+    .logo-presentation h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-light);
+      margin: 0;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      user-select: none;
+    }
+
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.3;
+      filter: blur(60px);
+      animation: float 6s ease-in-out infinite alternate;
+      z-index: -1;
+    }
+    .shape.one {
+      width: 140px;
+      height: 140px;
+      background: var(--accent-color);
+      top: -50px;
+      left: 20px;
+      animation-delay: 0s;
+    }
+    .shape.two {
+      width: 200px;
+      height: 200px;
+      background: var(--secondary-color);
+      top: 10px;
+      right: 40px;
+      animation-delay: 3s;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) translateX(0);
+      }
+      100% {
+        transform: translateY(-20px) translateX(10px);
+      }
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background-color: var(--primary-color);
+      color: var(--text-light);
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: var(--secondary-color);
+    }
+
+    .hero {
+      background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
+      color: var(--text-light);
+      text-align: center;
+      padding: 60px 20px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      margin-bottom: 60px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 30px;
+      color: var(--text-light);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+    }
+
+    .section-header h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .team-section, .services-section, .model-viewer-section {
+      padding: 60px 20px;
+      background: rgba(255 255 255 / 0.1);
+      border-radius: 20px;
+      margin-bottom: 40px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+      color: var(--text-light);
+    }
+
+    .team-grid, .services-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .service-card, .team-member {
+      background: rgba(255 255 255 / 0.15);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      text-align: center;
+      color: var(--text-light);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease;
+    }
+    .service-card:hover, .team-member:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+
+    .service-icon {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .member-avatar img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 2px solid var(--accent-color);
+    }
+
+    .member-avatar {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .model-viewer-section {
+      background: rgba(255 255 255 / 0.1);
+      text-align: center;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    }
+
+    model-viewer {
+      width: 100%;
+      max-width: 600px;
+      height: 400px;
+      margin: 20px auto;
+      border-radius: 12px;
+      background: rgba(255 255 255 / 0.85);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    #fileInput {
+      margin-top: 15px;
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+    }
+
+    footer p {
+      margin: 5px 0;
+      color: var(--text-light);
+      text-align: center;
+      user-select: none;
+    }
+  </style>
+
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+</head>
+<body>
+
+  <!-- Header avec le nouveau bouton -->
+  <header class="header">
+    <div class="container navbar">
+      <h1>TEAM DEV</h1>
+      <div class="nav-buttons">
+        <a href="notrelogo.html" class="btn">Découvrir notre logo</a>
+        <a href="https://www.figma.com/proto/eSv3hqLqOHC2IlU0YD0NGf/Untitled?node-id=173-128" class="btn" target="_blank">Figma</a>
+      </div>
+    
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>Bienvenue sur notre plateforme professionnelle</h1>
+      <p style="color: black; font-family: sans-serif;">Découvrez nos services et rencontrez notre équipe d'experts</p>       <a href="about.html" class="btn">Commencer</a>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section" id="team">
+    <div class="container">
+      <div class="section-header">
+        <h2>Notre Équipe</h2>
+        <p>Des professionnels dédiés à votre réussite</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-avatar">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sophie Martin">
+          </div>
+          <h3>Sophie Martin</h3>
+          <p>Directrice Marketing</p>
+        </div>
+        <div class="team-member">
+          <div class="member-avatar">
+            <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Thomas Dubois">
+          </div>
+          <h3>Thomas Dubois</h3>
+          <p>Chef de Projet</p>
+        </div>
+        <div class="team-member">
+          <div class="member-avatar">
+            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Marie Laurent">
+          </div>
+          <h3>Marie Laurent</h3>
+          <p>Designer UX/UI</p>
+        </div>
+        <div class="team-member">
+          <div class="member-avatar">
+            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Pierre Moreau">
+          </div>
+          <h3>Pierre Moreau</h3>
+          <p>Développeur Senior</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-section" id="services">
+    <div class="container">
+      <div class="section-header">
+        <h2>Nos Services</h2>
+        <p>Des solutions adaptées à vos besoins</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">💻</div>
+          <h3>Développement Web</h3>
+          <p>Création de sites web et d'applications sur mesure</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🎨</div>
+          <h3>Design UX/UI</h3>
+          <p>Interfaces utilisateur intuitives et esthétiques</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📊</div>
+          <h3>Marketing Digital</h3>
+          <p>Stratégies pour augmenter votre visibilité en ligne</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+   
+
+  <!-- Model Viewer Section -->
+  <section class="model-viewer-section">
+    <div class="container">
+      <h2>Visualiseur 3D du Modèle PC</h2>
+      <p>Visualisez le modèle 3D du PC ou chargez votre propre fichier .glb</p>
+
+      <model-viewer 
+        id="modelViewer" 
+        src="pc.glb" 
+        camera-controls 
+        auto-rotate 
+        environment-image="neutral" 
+        background-color="#ffffff"
+        alt="Modèle 3D PC"
+        ar
+        ar-modes="webxr scene-viewer quick-look">
+      </model-viewer>
+
+      <input type="file" id="fileInput" accept=".glb" />
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container contact-info">
+      <p>Contactez-nous : contact@teamdev.com | +216 27 530 614</p>
+      <p>&copy; 2025 TEAM DEV. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script>
+    const input = document.getElementById('fileInput');
+    const viewer = document.getElementById('modelViewer');
+
+    input.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (file && file.name.endsWith('.glb')) {
+        const url = URL.createObjectURL(file);
+        viewer.src = url;
+      } else {
+        alert('Veuillez sélectionner un fichier .glb valide.');
+      }
+    });
+  </script>
+
+</body>
+</html>

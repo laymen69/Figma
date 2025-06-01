@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chausse Professionnelle - Accueil</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary-color: #004e89;
+      --secondary-color: #00aaff;
+      --accent-color: #ffb400;
+      --bg-light: #f9fafb;
+      --bg-dark: #1f2937;
+      --text-color: #1a1a1a;
+      --text-light: #ffffff;
+      --font-family: 'Inter', sans-serif;
+      --gradient-bg: linear-gradient(135deg, #004e89 0%, #00aaff 100%);
+    }
+
+    /* Reset et base */
+    * {
+      box-sizing: border-box;
+    }
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      font-family: 'Montserrat', 'Inter', sans-serif;
+      background: linear-gradient(135deg, #1f4068 0%, #2980b9 100%);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Overlay léger sur le body */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(31, 41, 55, 0.85);
+      pointer-events: none;
+      z-index: -1;
+      will-change: transform;
+    }
+
+    /* Container général pour la présentation */
+    .presentation-container {
+      position: relative;
+      background: rgba(255 255 255 / 0.1);
+      backdrop-filter: blur(12px);
+      border-radius: 25px;
+      padding: 50px 3rem;
+      width: 90%;
+      max-width: 450px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+      text-align: center;
+      overflow: hidden;
+      z-index: 5;
+    }
+
+    /* Logo */
+    .logo {
+      width: 160px;
+      height: auto;
+      margin-bottom: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(255,255,255,0.25);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .logo:hover {
+      transform: scale(1.05) rotate(5deg);
+      box-shadow: 0 15px 30px rgba(255,255,255,0.5);
+    }
+
+    /* Titre */
+    .title {
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 4px;
+      margin-bottom: 15px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+      user-select: none;
+      transition: all 0.3s ease;
+    }
+    .title:hover {
+      text-shadow: 0 4px 12px rgba(255, 255, 255, 0.8);
+      transform: scale(1.05);
+      cursor: default;
+    }
+
+    /* Description */
+    .description {
+      font-weight: 400;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #d3dce6cc;
+      margin-bottom: 40px;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+    }
+
+    /* Formes graphiques */
+    .graphic-shapes {
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+    .circle {
+      width: 120px;
+      height: 120px;
+      border: 3px solid #fff5;
+      border-radius: 50%;
+      animation: pulse 3s ease-in-out infinite;
+    }
+    .square {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border: 3px solid #ff7e5faa;
+      top: 60px;
+      left: -50px;
+      transform: rotate(45deg);
+      animation: float 4s ease-in-out infinite alternate;
+    }
+    .line {
+      position: absolute;
+      width: 140px;
+      height: 6px;
+      background: linear-gradient(90deg, #ff7e5faa 0%, #feb47baa 100%);
+      top: 140px;
+      left: 20px;
+      border-radius: 3px;
+      animation: slide 5s linear infinite;
+    }
+
+    /* Animations */
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+    @keyframes float {
+      0% { transform: rotate(45deg) translateY(0); }
+      100% { transform: rotate(45deg) translateY(-15px); }
+    }
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(20px); }
+    }
+
+    /* Styles supplémentaires pour boutons ou autres sections si besoin */
+    .btn {
+      padding: 10px 20px;
+      background-color: var(--primary-color);
+      color: var(--text-light);
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: var(--secondary-color);
+    }
+
+  </style>
+</head>
+<body>
+  <div class="presentation-container">
+    <img src="TEAMDEV.png" alt="Logo de l'équipe de développement TEAMDEV" class="logo" />
+    <h1 class="title">TEAMDEV</h1>
+    <p class="description">
+      Un logo moderne, élégant et dynamique qui reflète la puissance et la créativité de notre équipe de développement.
+    </p>
+    <div class="graphic-shapes">
+      <div class="circle"></div>
+      <div class="square"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+</body>
+</html>
